@@ -58,6 +58,8 @@ namespace MORSE
         {DAH, DAH, DIT, DIT, NON}, // Z
     };
 
+    bool valid(char in);
+
     /// @brief Returns the address to the morse code encoding of the given alphanumeric character.
     /// @param in Alphanumeric character to encode.
     /// @return The starting address of the morse code CODE encoding. It is guaranteed that the address segment is 5 bytes long.

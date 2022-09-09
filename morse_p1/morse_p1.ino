@@ -1,19 +1,44 @@
 /*
-  Morse Code
+  Morse Code Transmitter
+  Designed for Arduino UNO
 */
 
+#include <string.h>
 #include "driver.hpp"
 
-uint8_t LED_PIN = 12;
+// ----- CONSTANTS ----- //
+const uint8_t LED_PIN = 12;
+const unsigned long UNIT_TIME = 50;
+const int MESSAGE_LIMIT = 255;
+bool ENABLE_TONE = true;
 
-// the setup function runs once when you press reset or power the board
+// ----- GLOABALS ----- //
+char message[MESSAGE_LIMIT];
+int length;
+bool halt;
+
+/// @brief Initialization
 void setup()
 {
-  DRIVER::initialize(LED_PIN);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
+  Serial.begin(9600);
+
+  memset(message, 0, MESSAGE_LIMIT);
+  length = 0;
+  halt = false;
+
+  Serial.println("MORSE CODE TRANSMITTER");
+  Serial.print("Enter: ");
 }
 
-// the loop function runs over and over again forever
+/// @brief Main Loop
 void loop()
 {
-  DRIVER::main(LED_PIN);
+  if (!halt)
+  {
+    DRIVER::output(LED_PIN, message, length, UNIT_TIME, ENABLE_TONE);
+    halt = DRIVER::input(MESSAGE_LIMIT, message, &length);
+  }
+  // halt indefinitely
 }

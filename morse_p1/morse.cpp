@@ -1,5 +1,11 @@
 #include "morse.hpp"
 
+
+bool MORSE::valid(char in)
+{
+    return (in >= 48 && in <= 57) || (in >= 65 && in <= 90) || (in >= 97 && in <= 122);
+}
+
 const MORSE::CODE* MORSE::encode(char in)
 {
     const MORSE::CODE *code = 0;

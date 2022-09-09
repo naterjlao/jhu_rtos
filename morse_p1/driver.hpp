@@ -3,12 +3,12 @@
 
 #include <Arduino.h>
 
+#define DEBUG 0
+
 namespace DRIVER
 {
-    const unsigned long UNIT_TIME = 75;
-
-    void initialize(uint8_t led_pin);
-    void main(uint8_t led_pin);
+    bool input(const int limit, char *message, int *length);
+    void output(uint8_t led_pin, char *message, size_t length, unsigned long unit_time = 75, bool enable_tone = false);
 }
 
 #endif
