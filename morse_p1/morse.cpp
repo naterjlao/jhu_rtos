@@ -1,5 +1,10 @@
-#include "morse.hpp"
+/*
+  Morse Code Transmitter
+  Author: Nate Lao (nlao1@jh.edu)
+  Designed for Arduino UNO
+*/
 
+#include "morse.hpp"
 
 bool MORSE::valid(char in)
 {

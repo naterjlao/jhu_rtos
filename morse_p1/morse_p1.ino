@@ -1,5 +1,6 @@
 /*
   Morse Code Transmitter
+  Author: Nate Lao (nlao1@jh.edu)
   Designed for Arduino UNO
 */
 
@@ -10,7 +11,7 @@
 const uint8_t LED_PIN = 12;
 const unsigned long UNIT_TIME = 50;
 const int MESSAGE_LIMIT = 255;
-bool ENABLE_TONE = true;
+bool ENABLE_TONE = false;
 
 // ----- GLOABALS ----- //
 char message[MESSAGE_LIMIT];
@@ -29,6 +30,7 @@ void setup()
   halt = false;
 
   Serial.println("MORSE CODE TRANSMITTER");
+  Serial.println("Author: Nate Lao (nlao@jh.edu)");
   Serial.print("Enter: ");
 }
 

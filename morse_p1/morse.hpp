@@ -1,3 +1,9 @@
+/*
+  Morse Code Transmitter
+  Author: Nate Lao (nlao1@jh.edu)
+  Designed for Arduino UNO
+*/
+
 #ifndef __MORSE_HPP__
 #define __MORSE_HPP__
 
