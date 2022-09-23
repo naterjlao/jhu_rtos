@@ -4,7 +4,7 @@
 
 /// @note Arduino UNO compatible
 
-#include "timer.hpp"
+#include "isr_timer.hpp"
 
 void TIMER::setISRTimer(const unsigned long hertz)
 {
@@ -19,7 +19,7 @@ void TIMER::setISRTimer(const unsigned long hertz)
     TCCR1B = 0; // same for TCCR1B
     TCNT1 = 0;  // initialize counter value to 0
 
-    // set compare match register for 1hz increments
+    // set compare match register for x hz increments
     OCR1A = TIMER_COMPARE_REGISTER_1HZ / hertz;
 
     // turn on CTC mode

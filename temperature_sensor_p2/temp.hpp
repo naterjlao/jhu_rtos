@@ -7,16 +7,21 @@
 
 namespace TEMP
 {
+    typedef struct data_buffer
+    {
+        float temp_f;
+    } DATA_BUFFER;
+
     class Sensor
     {
-        public:
-        Sensor();
+    public:
+        Sensor(uint8_t pin, uint8_t type, DATA_BUFFER *buffer, const DATA_BUFFER *offset);
+        bool sample();
 
-
-
-        private:
-        DHT* dht;
-
+    private:
+        DHT *dht;
+        DATA_BUFFER *buffer;
+        const DATA_BUFFER *offset;
     };
 }
 
