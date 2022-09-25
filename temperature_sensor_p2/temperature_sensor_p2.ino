@@ -11,7 +11,7 @@
 #include "temp.hpp"
 
 // Sampling Variables
-const unsigned long INTERVAL = 1;
+const unsigned long INTERVAL = 10;
 volatile unsigned long time;
 volatile bool trigger;
 volatile TEMP::DATA_BUFFER sample;
