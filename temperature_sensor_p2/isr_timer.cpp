@@ -1,8 +1,9 @@
-
-
-// https://www.instructables.com/Arduino-Timer-Interrupts/
-
-/// @note Arduino UNO compatible
+/*
+  Temperature Sensor
+  Author: Nate Lao (nlao1@jh.edu)
+  Designed for Arduino UNO
+  Based on implementation from https://www.instructables.com/Arduino-Timer-Interrupts/
+*/
 
 #include "isr_timer.hpp"
 

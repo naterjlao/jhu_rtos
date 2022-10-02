@@ -1,6 +1,11 @@
-#include "temp.hpp"
+/*
+  Temperature Sensor
+  Author: Nate Lao (nlao1@jh.edu)
+  Designed for Arduino UNO
+*/
 
 #include <DHT.h>
+#include "temp.hpp"
 
 TEMP::Sensor::Sensor(uint8_t pin, uint8_t type, DATA_BUFFER *buffer, const DATA_BUFFER *offset)
 {

@@ -1,3 +1,8 @@
+/*
+  Temperature Sensor
+  Author: Nate Lao (nlao1@jh.edu)
+  Designed for Arduino UNO
+*/
 
 #ifndef __TEMP_HPP__
 #define __TEMP_HPP__

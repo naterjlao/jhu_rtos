@@ -1,4 +1,8 @@
-
+/*
+  Temperature Sensor
+  Author: Nate Lao (nlao1@jh.edu)
+  Designed for Arduino UNO
+*/
 
 #define LCD_ENABLE 1
 
@@ -14,12 +18,12 @@
 const unsigned long INTERVAL = 10;
 volatile unsigned long time;
 volatile bool trigger;
-volatile TEMP::DATA_BUFFER sample;
+volatile TEMP::DATA_BUFFER sample_buffer;
 
 // Temperature Sensor
 const uint8_t DHTPIN = 2;
 const uint8_t DHTTYPE = DHT11;
-const TEMP::DATA_BUFFER sensor_offset = {-1.66};
+const TEMP::DATA_BUFFER SENSOR_OFFSET = {-1.66};
 TEMP::DATA_BUFFER sensor_buffer;
 TEMP::Sensor *sensor = 0;
 
@@ -42,7 +46,7 @@ void setup()
     // Initialize Interrupt Variables
     time = 0;
     trigger = false;
-    sample.temp_f = 0.0;
+    sample_buffer.temp_f = 0.0;
 
     // Setup 1 Hz Timer Interrupt
     cli(); // Disable Interupts
@@ -51,7 +55,7 @@ void setup()
 
     // Initialize Temperature Sensor and Buffer
     memset(&sensor_buffer, 0, sizeof(sensor_buffer));
-    sensor = new TEMP::Sensor(DHTPIN, DHTTYPE, &sensor_buffer, &sensor_offset);
+    sensor = new TEMP::Sensor(DHTPIN, DHTTYPE, &sensor_buffer, &SENSOR_OFFSET);
 
     // Setup Serial and Start CSV Logging
     Serial.begin(9600);
@@ -76,7 +80,7 @@ void loop()
     lcd->setCursor(0,1);
     lcd->print(time);
     lcd->setCursor(8,1);
-    lcd->print(sample.temp_f);
+    lcd->print(sample_buffer.temp_f);
 #endif
 
     // If the interval trigger is set - log out to Serial
@@ -85,7 +89,7 @@ void loop()
     {
         Serial.print(time);
         Serial.print(",");
-        Serial.println(sample.temp_f);
+        Serial.println(sample_buffer.temp_f);
         trigger = false;
     }
 }
@@ -100,5 +104,5 @@ ISR(TIMER1_COMPA_vect)
     trigger = (time % INTERVAL) == 0;
 
     // Set sample value to the value(s) stored in the current buffer
-    sample.temp_f = sensor_buffer.temp_f;
+    sample_buffer.temp_f = sensor_buffer.temp_f;
 }
