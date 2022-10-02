@@ -1,0 +1,6 @@
+{
+    "board": "arduino:avr:uno",
+    "programmer": "arduino:avrisp",
+    "port": "COM3",
+    "sketch": "temperature_sensor_p2\\temperature_sensor_p2.ino"
+}
