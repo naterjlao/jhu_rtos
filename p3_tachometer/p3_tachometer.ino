@@ -1,4 +1,8 @@
-// https://learn.sparkfun.com/tutorials/driving-motors-with-arduino/all
+/*
+  Tachometer
+  Author: Nate Lao (nlao1@jh.edu)
+  Designed for Arduino UNO
+*/
 
 #include <LiquidCrystal.h>
 #include "isr_timer.hpp"
@@ -79,8 +83,6 @@ void setup()
     measured_phase = 0;
     current_phase = 0;
     rpm = 0;
-
-
 }
 
 ISR(TIMER1_COMPA_vect)
