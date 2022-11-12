@@ -1,38 +1,48 @@
+# Weather Station Monitor Driver
+# Author: Nate Lao (nlao1@jh.edu)
+# Designed for Windows OS
 import PySimpleGUI as sg
 import weather_station_monitor_gui as gui
-
+import weather_station_monitor_lib as lib
 if __name__ == "__main__":
     ########## Initialization ##########
-
     # GUI Window
     window = sg.Window('ESP Weather Station Monitor', gui.LAYOUT, finalize=True)
-
     # Set Communication Status
-    comm_state = 'red'
     gui.SetLED(window, gui.COMM_LED_KEY, 'red')
-
+    # Setup Receiver
+    receiver = lib.RECEIVER()
+    # Output logging
+    #print("sample, temp, humidity")
     ########## Event Loop ##########
-    for i in range(1000):
+    while True:
         # Check to see if the cancel button was clicked and exit loop if clicked
         event, values = window.read(timeout=10)
         if event == 'Cancel' or event == sg.WIN_CLOSED:
             break
+        # Poll Rx
+        payload = receiver.recv()
 
-        # TODO BEBUGGING
-
-        # Update bar with loop value +1 so that bar eventually reaches the maximum
-        window[gui.TEMP_BAR_KEY].update(i+1)
-        window[gui.TEMP_VAL_KEY].update(i+1)
-        window[gui.HUMD_BAR_KEY].update(i+1)
-        window[gui.HUMD_VAL_KEY].update(i+1)
-
-        if i % 100 == 0:
-            comm_state = 'green' if comm_state == 'red' else 'red'
-            print(comm_state,i)
-            gui.SetLED(window, gui.COMM_LED_KEY, comm_state)
-
-    # Loop Terminated - Kill Window
-    window.close()
-
+        if payload != None:
+            # Connection OK, Payload Verified
+            gui.SetLED(window, gui.COMM_LED_KEY, 'green')
+            # Unpack payload
+            traffic_id, sample_n, temp, humidity = payload
+            # Update GUI
+            window[gui.SAMPLE_N_KEY].update(sample_n)
+            window[gui.TEMP_BAR_KEY].update(temp)
+            window[gui.TEMP_VAL_KEY].update(temp)
+            window[gui.HUMD_BAR_KEY].update(humidity)
+            window[gui.HUMD_VAL_KEY].update(humidity)
+            #print(f"{sample_n},{temp},{humidity}")
+        else:
+            gui.SetLED(window, gui.COMM_LED_KEY, 'red')
+            window[gui.SAMPLE_N_KEY].update("N/A")
+            window[gui.TEMP_BAR_KEY].update(0)
+            window[gui.TEMP_VAL_KEY].update("N/A")
+            window[gui.HUMD_BAR_KEY].update(0)
+            window[gui.HUMD_VAL_KEY].update("N/A")
+            # Loop Terminated - Kill Window
+            window.close()
 else:
     print("This application cannot be imported, please execute directly.")
