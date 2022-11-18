@@ -31,9 +31,9 @@ if __name__ == "__main__":
             # Update GUI
             window[gui.SAMPLE_N_KEY].update(sample_n)
             window[gui.TEMP_BAR_KEY].update(temp)
-            window[gui.TEMP_VAL_KEY].update(temp)
+            window[gui.TEMP_VAL_KEY].update(f"{temp:.2f}")
             window[gui.HUMD_BAR_KEY].update(humidity)
-            window[gui.HUMD_VAL_KEY].update(humidity)
+            window[gui.HUMD_VAL_KEY].update(f"{humidity:.2f}")
             #print(f"{sample_n},{temp},{humidity}")
         else:
             gui.SetLED(window, gui.COMM_LED_KEY, 'red')
