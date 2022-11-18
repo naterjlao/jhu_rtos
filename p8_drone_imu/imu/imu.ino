@@ -2,8 +2,12 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BNO055.h>
 #include <utility/imumaths.h>
+
+#include "include/imu_def.hpp"
   
 Adafruit_BNO055 bno = Adafruit_BNO055(55);
+sensors_event_t event;
+
 
 void setup(void) 
 {
@@ -26,7 +30,7 @@ void setup(void)
 void loop(void) 
 {
   /* Get a new sensor event */ 
-  sensors_event_t event; 
+  
   bno.getEvent(&event);
   
   /* Display the floating point data */
