@@ -6,6 +6,8 @@
 
 #include <wiringSerial.h>
 
+#include "imu_def.hpp"
+
 int main ()
 {
   int fd ;

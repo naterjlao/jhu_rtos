@@ -1,6 +1,14 @@
 #ifndef __IMU_DEF_HPP__
 #define __IMU_DEF_HPP__
 
+#ifndef uint32_t
+#define uint32_t unsigned long
+#endif
+
+#ifndef float_t
+#define float_t float
+#endif
+
 namespace IMU
 {
     //-----------------------------------------------------------------------------
