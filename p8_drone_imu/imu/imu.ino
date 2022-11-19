@@ -18,6 +18,16 @@ UBaseType_t PRIORITY_SENSOR_TASK = tskIDLE_PRIORITY + 1;
 TaskHandle_t Handle_SensorTask;
 static void SensorThread(void *pvParameters)
 {
+  sensor_driver = new IMU::Sensor(BNO_SENSOR_ID, &buffer);
+
+  // Attempt to intialize the sensor
+  // If failed, re-attempt indefinitely
+  while (!sensor_driver->begin())
+  {
+    delay(100);
+  }
+
+  // Sensor Intialization Success - Normal Operation
   while (1)
   {
     sensor_driver->frame();
@@ -32,17 +42,18 @@ static void SerialThread(void *pvParameters)
   while (1)
   {
     Serial.write((const char *)&buffer, sizeof(buffer));
-    delay(100);
+    delay(TX_RATE);
   }
 }
 
 // ----- MAIN ----- //
 void setup(void)
 {
-  Serial.begin(9600);
-  sensor_driver = new IMU::Sensor(BNO_SENSOR_ID, &buffer);
-  sensor_driver->begin();
+  // Intialize the output payload to FAILURE on startup
+  memcpy(&buffer, &IMU::FAILURE_PAYLOAD, sizeof(buffer));
 
+  // Setup Serial
+  Serial.begin(9600);
   vNopDelayMS(1000); // prevents usb driver crash on startup, do not omit this
   while (!Serial)
   {
