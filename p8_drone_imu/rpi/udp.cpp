@@ -11,9 +11,12 @@ const int MULTICAST_PORT = 8266;
 
 int main(void)
 {
-    int socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
-
+    int socket_fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     printf("socket 0x%x\n",socket_fd);
+
+    int enable = 1;
+    int ret=setsockopt(socket_fd, SOL_SOCKET, SO_BROADCAST, &enable, sizeof(enable));
+    print("setsockopt %d\n",ret);
 
     struct sockaddr_in addr;
     memset(&addr, 0, sizeof(addr));
@@ -21,6 +24,8 @@ int main(void)
     addr.sin_addr.s_addr = inet_addr(MULTICAST_IP);
     addr.sin_port = htons(MULTICAST_PORT);
 
+    ret = bind(socket_fd, (struct sockaddr*)&addr, sizeof(addr));
+    print("bind %d\n",ret);
 
     const char *message = "Hello, World!";
     int nbytes;
