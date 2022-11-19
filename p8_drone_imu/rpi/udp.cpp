@@ -24,7 +24,7 @@ int main(void)
     host.sin_addr.s_addr = htonl(INADDR_ANY);
     host.sin_port = htons(1900);
 
-    ret = bind(socket_fd, (struct sockaddr*)&addr, sizeof(addr));
+    ret = bind(socket_fd, (struct sockaddr*)&host, sizeof(host));
     printf("bind %d\n",ret);
 
     struct sockaddr_in addr;
