@@ -1,46 +1,62 @@
-#include <Wire.h>
-#include <Adafruit_Sensor.h>
-#include <Adafruit_BNO055.h>
-#include <utility/imumaths.h>
+// ----- RTOS LIBRARY ----- //
+#include <Seeed_Arduino_FreeRTOS.h>
 
+// ----- LOCAL LIBRARIES ----- //
 #include "include/imu_def.hpp"
-  
-Adafruit_BNO055 bno = Adafruit_BNO055(55);
-sensors_event_t event;
+#include "include/imu_sensor.hpp"
 
+const int32_t BNO_SENSOR_ID = 55; /** @note Sensor ID, do not change */
+const unsigned long TX_RATE = 50; /** @note Delay per transmission (smaller -> faster) */
 
-void setup(void) 
+IMU::PAYLOAD buffer;
+IMU::Sensor *sensor_driver = 0;
+
+// ----- RTOS THREADS ----- //
+
+/// @note Prority Ranking (larger -> higher priority)
+UBaseType_t PRIORITY_SENSOR_TASK = tskIDLE_PRIORITY + 1;
+TaskHandle_t Handle_SensorTask;
+static void SensorThread(void *pvParameters)
 {
-  Serial.begin(9600);
-  Serial.println("Orientation Sensor Test"); Serial.println("");
-  
-  /* Initialise the sensor */
-  if(!bno.begin())
+  while (1)
   {
-    /* There was a problem detecting the BNO055 ... check your connections */
-    Serial.print("Ooops, no BNO055 detected ... Check your wiring or I2C ADDR!");
-    while(1);
+    sensor_driver->frame();
   }
-  
-  delay(1000);
-    
-  bno.setExtCrystalUse(true);
 }
 
-void loop(void) 
+/// @note Prority Ranking (larger -> higher priority)
+UBaseType_t PRIORITY_SERIAL_TASK = tskIDLE_PRIORITY + 2;
+TaskHandle_t Handle_SerialTask;
+static void SerialThread(void *pvParameters)
 {
-  /* Get a new sensor event */ 
-  
-  bno.getEvent(&event);
-  
-  /* Display the floating point data */
-  Serial.print("X: ");
-  Serial.print(event.orientation.x, 4);
-  Serial.print("\tY: ");
-  Serial.print(event.orientation.y, 4);
-  Serial.print("\tZ: ");
-  Serial.print(event.orientation.z, 4);
-  Serial.println("");
-  
-  delay(100);
+  while (1)
+  {
+    Serial.write((const char *)&buffer, sizeof(buffer));
+    delay(100);
+  }
+}
+
+// ----- MAIN ----- //
+void setup(void)
+{
+  Serial.begin(9600);
+  sensor_driver = new IMU::Sensor(BNO_SENSOR_ID, &buffer);
+  sensor_driver->begin();
+
+  vNopDelayMS(1000); // prevents usb driver crash on startup, do not omit this
+  while (!Serial)
+  {
+  } // Wait for Serial terminal to open port before starting program
+
+  // Spin up the threads
+  xTaskCreate(SensorThread, "IMU Sensor Sampling", 256, NULL, PRIORITY_SENSOR_TASK, &Handle_SensorTask);
+  xTaskCreate(SerialThread, "Serial Transmission", 256, NULL, PRIORITY_SERIAL_TASK, &Handle_SerialTask);
+
+  // Start the RTOS, this function will never return and will schedule the tasks.
+  vTaskStartScheduler();
+}
+
+void loop(void)
+{
+  // NOTHING
 }
