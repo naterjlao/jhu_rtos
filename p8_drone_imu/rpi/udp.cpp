@@ -6,12 +6,14 @@
 #include <string.h>
 #include <unistd.h>
 
-const char* MULTICAST_IP = "192.168.4.100";
-const int MULTICAST_PORT = 8266;
+/// @note IP 239.255.255.250:8250
+/// works for some reason (http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xhtml)
+const char* MULTICAST_IP = "239.100.100.250";
+const int MULTICAST_PORT = 8250;
 
 int main(void)
 {
-    int socket_fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    int socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
     printf("socket 0x%x\n",socket_fd);
 
     int enable = 1;
@@ -22,7 +24,7 @@ int main(void)
     memset(&host, 0, sizeof(host));
     host.sin_family = AF_INET;
     host.sin_addr.s_addr = htonl(INADDR_ANY);
-    host.sin_port = htons(1900);
+    host.sin_port = htons(8000);
 
     ret = bind(socket_fd, (struct sockaddr*)&host, sizeof(host));
     printf("bind %d\n",ret);
