@@ -16,7 +16,16 @@ int main(void)
 
     int enable = 1;
     int ret=setsockopt(socket_fd, SOL_SOCKET, SO_BROADCAST, &enable, sizeof(enable));
-    print("setsockopt %d\n",ret);
+    printf("setsockopt %d\n",ret);
+
+    struct sockaddr_in host;
+    memset(&host, 0, sizeof(host));
+    host.sin_family = AF_INET;
+    host.sin_addr.s_addr = htonl(INADDR_ANY);
+    host.sin_port = htons(1900);
+
+    ret = bind(socket_fd, (struct sockaddr*)&addr, sizeof(addr));
+    printf("bind %d\n",ret);
 
     struct sockaddr_in addr;
     memset(&addr, 0, sizeof(addr));
@@ -24,15 +33,12 @@ int main(void)
     addr.sin_addr.s_addr = inet_addr(MULTICAST_IP);
     addr.sin_port = htons(MULTICAST_PORT);
 
-    ret = bind(socket_fd, (struct sockaddr*)&addr, sizeof(addr));
-    print("bind %d\n",ret);
-
     const char *message = "Hello, World!";
     int nbytes;
     while(1)
     {
         nbytes = sendto(socket_fd, message, strlen(message),0,(struct sockaddr*) &addr, sizeof(addr));
-        printf("transmit %d\n",nbytes);
+        //printf("transmit %d\n",nbytes);
         //sleep(1);
     }
 
