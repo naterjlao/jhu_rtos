@@ -5,21 +5,33 @@
 #include <string.h>
 #include <errno.h>
 
-#include <wiringSerial.h>
-
 #include "imu_def.hpp"
+#include "serial.hpp"
 
-int main ()
+int main()
 {
-  int fd ;
+    SERIAL::USB* usb = new SERIAL::USB("/dev/ttyACM1",9600,IMU::SYNC_WORD);
+    IMU::PAYLOAD imu_payload;
+    int retval = 0;
 
-  if((fd=serialOpen("/dev/ttyACM1",9600))<0){
-    fprintf(stderr,"Unable to open serial device: %s\n",strerror(errno));
-    return 1;
-  }
+    while (1)
+    {
+        retval = usb->read(&imu_payload,sizeof(imu_payload));
+        if (retval > 0)
+        {
+            printf("0x%x ",imu_payload.sync_word);
+            printf("%f ",imu_payload.yaw);
+            printf("%f ",imu_payload.pitch);
+            printf("%f\n",imu_payload.roll);
+        }
+        else
+        {
+            printf("INVALID\n");
+        }
+    }
 
-  for (;;){
-    putchar(serialGetchar(fd));
-    fflush(stdout);
-  }
+    if (usb > 0)
+    {
+        delete usb;
+    }
 }
