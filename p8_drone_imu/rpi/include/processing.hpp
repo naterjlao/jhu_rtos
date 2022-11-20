@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------------
+/// @file processing.hpp
+/// @author Nate Lao (nlao1@jh.edu)
+/// @brief Defines Processing Functions for FlyPi operations.
+//-----------------------------------------------------------------------------
 #ifndef __PROCESSING_HPP__
 #define __PROCESSING_HPP__
 

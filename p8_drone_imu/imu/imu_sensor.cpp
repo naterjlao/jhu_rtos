@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------------
+/// @file imu_sensor.cpp
+/// @author Nate Lao (nlao1@jh.edu)
+/// @brief Defines the IMU sensor initialization and reading operations.
+//-----------------------------------------------------------------------------
 #include <Seeed_Arduino_FreeRTOS.h>
 
 #include <Wire.h>
@@ -28,6 +33,9 @@ bool IMU::Sensor::begin()
     return retval;
 }
 
+//-----------------------------------------------------------------------------
+/// @brief  Loads the io read buffer with sensor data. 
+//-----------------------------------------------------------------------------
 bool IMU::Sensor::frame()
 {
     bool retval = sensor.getEvent(&event);

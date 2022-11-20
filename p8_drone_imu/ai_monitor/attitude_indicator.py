@@ -1,3 +1,7 @@
+# Attitude Indicator
+# Author: Nate Lao (nlao1@jh.edu)
+# Designed for Windows OS
+# GUI Driver for AI measurements
 import PySimpleGUI as sg
 import attitude_indicator_lib as lib
 

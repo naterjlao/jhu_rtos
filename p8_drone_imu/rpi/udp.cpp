@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------------
+/// @file udp.cpp
+/// @author Nate Lao (nlao1@jh.edu)
+/// @brief Defines the WiFi UDP Interface class.
+//-----------------------------------------------------------------------------
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -8,6 +13,9 @@
 
 #include "protocol.hpp"
 
+//-----------------------------------------------------------------------------
+/// @brief Opens a UDP Multicast Socket for transmission to the given IP and port.
+//-----------------------------------------------------------------------------
 PROTOCOL::UDP::UDP(const char* dest_ip, const int dest_port, const int process_port)
 {
     bool status = true;
@@ -65,11 +73,17 @@ PROTOCOL::UDP::UDP(const char* dest_ip, const int dest_port, const int process_p
     }
 }
 
+//-----------------------------------------------------------------------------
+/// @brief Destructor
+//-----------------------------------------------------------------------------
 PROTOCOL::UDP::~UDP()
 {
     if (socket_fd >= 0) close(socket_fd);
 }
 
+//-----------------------------------------------------------------------------
+/// @brief Transmit the given buffer on current io adapter.
+//-----------------------------------------------------------------------------
 size_t PROTOCOL::UDP::transmit(const void *buf, size_t len)
 {
     return sendto(socket_fd, buf, len, 0, (struct sockaddr*) &dest_addr, sizeof(dest_addr));

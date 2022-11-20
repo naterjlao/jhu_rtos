@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------------
+/// @file serial.hpp
+/// @author Nate Lao (nlao1@jh.edu)
+/// @brief Defines MCU-to-RPi Serial Interfaces.
+//-----------------------------------------------------------------------------
 #ifndef __SERIAL_HPP__
 #define __SERIAL_HPP__
 

@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------------
+/// @file imu_def.hpp
+/// @author Nate Lao (nlao1@jh.edu)
+/// @brief Defines the IMU serial payload
+//-----------------------------------------------------------------------------
 #ifndef __IMU_DEF_HPP__
 #define __IMU_DEF_HPP__
 

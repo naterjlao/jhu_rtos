@@ -1,3 +1,10 @@
+//-----------------------------------------------------------------------------
+/// @file imu.ino
+/// @author Nate Lao (nlao1@jh.edu)
+/// @brief Main RTOS driver for the IMU Sensor.
+/// @details Designed for Seeed Studio Xiao microcontroller.
+//-----------------------------------------------------------------------------
+
 // ----- RTOS LIBRARY ----- //
 #include <Seeed_Arduino_FreeRTOS.h>
 

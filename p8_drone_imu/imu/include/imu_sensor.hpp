@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------------
+/// @file imu_sensor.hpp
+/// @author Nate Lao (nlao1@jh.edu)
+/// @brief Defines the IMU sensor class.
+//-----------------------------------------------------------------------------
 #ifndef __IMU_SENSOR_HPP__
 #define __IMU_SENSOR_HPP__
 

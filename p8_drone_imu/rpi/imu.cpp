@@ -1,6 +1,11 @@
-
-//https://stackoverflow.com/questions/49577244/serial-communication-between-rpi-and-arduino-using-c
-//https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
+//-----------------------------------------------------------------------------
+/// @file imu.cpp
+/// @author Nate Lao (nlao1@jh.edu)
+/// @brief Main Driver for the FlyPi IMU process.
+/// @details References:
+/// https://stackoverflow.com/questions/49577244/serial-communication-between-rpi-and-arduino-using-c
+/// https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
+//-----------------------------------------------------------------------------
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -27,6 +32,9 @@ const int TARGET_PORT = 8250;
 //-----------------------------------------------------------------------------
 const int PROCESS_PORT = 8000;
 
+//-----------------------------------------------------------------------------
+/// @brief Main Driver for FlyPi IMU process
+//-----------------------------------------------------------------------------
 int main()
 {
     int retval = 0;
@@ -66,7 +74,9 @@ int main()
     if (udp > 0) delete udp;
 }
 
-/// @brief 
+//-----------------------------------------------------------------------------
+/// @brief Host-to-Network conversion for 32-bit float values.
+//-----------------------------------------------------------------------------
 static float htonf32(float input)
 {
     float output;
@@ -77,9 +87,11 @@ static float htonf32(float input)
     return output;
 }
 
+//-----------------------------------------------------------------------------
 /// @brief Processes the given serial input to udp output
 /// @note For now, this does a straight pass-thru, with no processing.
 /// If any filtering is to be performed, it should be performed here.
+//-----------------------------------------------------------------------------
 void IMU::process(const IMU::PAYLOAD* input, PROTOCOL::IMU_DATA* output)
 {
     output->validity = 0x0;

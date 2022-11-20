@@ -1,3 +1,8 @@
+//-----------------------------------------------------------------------------
+/// @file protocol.hpp
+/// @author Nate Lao (nlao1@jh.edu)
+/// @brief Defines RPi-to-Host Protocol communcations.
+//-----------------------------------------------------------------------------
 #ifndef __PROTOCOL_HPP__
 #define __PROTOCOL_HPP__
 

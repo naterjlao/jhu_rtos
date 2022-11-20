@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------
+/// @file serial_usb.cpp
+/// @author Nate Lao (nlao1@jh.edu)
+/// @brief Defines the USB interface class.
+//-----------------------------------------------------------------------------
+
 #include <stdio.h>
 #include <string.h>
 #include <wiringSerial.h>
@@ -5,6 +11,10 @@
 #include "serial.hpp"
 #include "imu_def.hpp"
 
+//-----------------------------------------------------------------------------
+/// @brief Constructor
+/// @details The sync_word is used to verify input.
+//-----------------------------------------------------------------------------
 SERIAL::USB::USB(const char* device, int baud, uint32_t sync_word)
 {
     fd = serialOpen(device, baud);
@@ -14,6 +24,9 @@ SERIAL::USB::USB(const char* device, int baud, uint32_t sync_word)
 #endif
 }
 
+//-----------------------------------------------------------------------------
+/// @brief Destructor
+//-----------------------------------------------------------------------------
 SERIAL::USB::~USB()
 {
     if (fd >= 0)
@@ -22,6 +35,10 @@ SERIAL::USB::~USB()
     }
 }
 
+//-----------------------------------------------------------------------------
+/// @brief Performs a USB read function. The stream is synced as per the defined
+/// SYNC WORD.
+//-----------------------------------------------------------------------------
 int SERIAL::USB::read(void* buf_ptr, size_t buf_size)
 {
     int retval = -1;
