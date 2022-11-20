@@ -4,12 +4,9 @@
 #include "imu_def.hpp"
 #include "protocol.hpp"
 
-namespace PROCESSING
+namespace IMU
 {
-    namespace IMU_PROCESS
-    {
-        void process(IMU::PAYLOAD* input, PROTOCOL::IMU_DATA* output);
-    }
+    void process(const IMU::PAYLOAD* input, PROTOCOL::IMU_DATA* output);
 }
 
 #endif
