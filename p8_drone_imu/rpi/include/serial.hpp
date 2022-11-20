@@ -1,16 +1,16 @@
-#ifndef __INTERFACE_HPP__
-#define __INTERFACE_HPP__
+#ifndef __SERIAL_HPP__
+#define __SERIAL_HPP__
 
-namespace INTERFACE 
+namespace SERIAL 
 {
-    class Serial_USB
+    class USB
     {
         Serial_USB(char* device, int baud);
         bool sync(char* symbol, size_t size);
         size_t read(void* buf_ptr, size_t buf_size);
     }
 
-    class Serial_SPI
+    class SPI
     {
         /// @todo to be defined
         Serial_SPI();
@@ -18,7 +18,7 @@ namespace INTERFACE
         size_t read(void* buf_ptr, size_t buf_size);
     }
 
-    class Serial_I2C
+    class I2C
     {
         /// @todo to be defined
         Serial_I2C();
