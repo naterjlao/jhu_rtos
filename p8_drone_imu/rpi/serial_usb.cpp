@@ -10,7 +10,7 @@ SERIAL::USB::USB(const char* device, int baud, uint32_t sync_word)
     fd = serialOpen(device, baud);
     memcpy(this->sync_word, &sync_word, SYNC_WORD_SIZE);
 #if DEBUG
-    if (fd < 0) printf("SERIAL::USB constructor failed.\n");
+    if (fd < 0) printf("SERIAL::USB initialization failed.\n");
 #endif
 }
 
