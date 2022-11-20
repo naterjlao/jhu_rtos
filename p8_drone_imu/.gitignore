@@ -1,4 +1,4 @@
 output/
 **/*.o
 **/a.out
-**/flypi
+**/imu

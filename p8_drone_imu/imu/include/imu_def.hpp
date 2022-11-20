@@ -2,7 +2,7 @@
 #define __IMU_DEF_HPP__
 
 #ifndef uint32_t
-#define uint32_t unsigned long
+#include <netinet/in.h>
 #endif
 
 #ifndef float_t
