@@ -1,11 +1,8 @@
 #ifndef __IMU_DEF_HPP__
 #define __IMU_DEF_HPP__
 
-#ifndef uint32_t
+#ifdef RPI
 #include <netinet/in.h>
-#endif
-
-#ifndef float_t
 #define float_t float
 #endif
 

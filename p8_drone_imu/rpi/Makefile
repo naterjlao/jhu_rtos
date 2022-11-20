@@ -1,5 +1,5 @@
 CC = g++
-FLAGS = -DDEBUG=1
+FLAGS = -DDEBUG=1 -DDRPI
 OBJ = serial_usb.o udp.o
 LIBS = wiringPi
 INCLUDES = -I../imu/include/ -Iinclude/
