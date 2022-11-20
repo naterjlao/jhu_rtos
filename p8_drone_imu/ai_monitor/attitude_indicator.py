@@ -3,7 +3,7 @@ import attitude_indicator_lib as lib
 
 sg.theme('Dark Blue')
 
-FONT_SIZE = ('Any 20')
+FONT_SIZE = ('Any 30')
 LAYOUT = [
     [sg.Text('Attitude Indicator Raw Monitor',font=FONT_SIZE)],
     [sg.Text('Yaw = ',font=FONT_SIZE), sg.Text("N/A",key="--yaw--",font=FONT_SIZE)],
