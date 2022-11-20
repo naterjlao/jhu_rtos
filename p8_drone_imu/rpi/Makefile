@@ -4,10 +4,10 @@ OBJ = serial_usb.o
 LIBS = wiringPi
 INCLUDES = -I../imu/include/ -Iinclude/
 
-all: flypi
+all: imu
 
-flypi: flypi.cpp serial_usb.o
-	$(CC) flypi.cpp $(FLAGS) $(OBJ) -l$(LIBS) $(INCLUDES) -o flypi
+imu: imu.cpp serial_usb.o
+	$(CC) imu.cpp $(FLAGS) $(OBJ) -l$(LIBS) $(INCLUDES) -o imu
 
 serial_usb.o: serial_usb.cpp
 	$(CC) $(FLAGS) $(INCLUDES) -c serial_usb.cpp
@@ -15,4 +15,4 @@ serial_usb.o: serial_usb.cpp
 clean:
 	rm -rvf *.o
 	rm -rvf *.out
-	rm -rvf flypi
+	rm -rvf imu
