@@ -14,4 +14,5 @@ serial_usb.o: serial_usb.cpp
 
 clean:
 	rm -rvf *.o
+	rm -rvf *.out
 	rm -rvf flypi
