@@ -1,0 +1,4 @@
+output/
+**/*.o
+**/a.out
+**/imu

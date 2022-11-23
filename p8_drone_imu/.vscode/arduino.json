@@ -1,0 +1,8 @@
+{
+    "configuration": "usbstack=arduino,debug=off,sercom4=include",
+    "board": "Seeeduino:samd:seeed_XIAO_m0",
+    "port": "COM5",
+    "programmer": "Seeeduino:adafruit_jlink",
+    "sketch": "imu\\imu.ino",
+    "output": "output"
+}
