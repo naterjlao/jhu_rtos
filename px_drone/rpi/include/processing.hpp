@@ -14,4 +14,16 @@ namespace IMU
     void process(const IMU::PAYLOAD* input, PROTOCOL::IMU_DATA* output);
 }
 
+namespace GPS
+{
+    /// @todo to be defined
+    void process();
+}
+
+namespace CAM
+{
+    /// @todo to be defined
+    void process();
+}
+
 #endif
