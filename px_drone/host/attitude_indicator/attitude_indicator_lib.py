@@ -8,7 +8,7 @@ class RECEIVER:
     BROADCAST = "239.100.100.250"
     PORT = 8250
     # NOTE: This is windows dependent for connecting to the correct interface
-    INTERFACE = "192.168.4.35"
+    INTERFACE = "192.168.12.248"#192.168.4.35"
 
     PAYLOAD_SIZE = 16
     PAYLOAD_FORM = '!fff1b3b'
