@@ -1,3 +1,3 @@
 make clean
 make all
-mv -v imu ~/flypi.d/
+mv -v flypi-imu.d ~/flypi.d/
