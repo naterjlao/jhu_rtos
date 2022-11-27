@@ -9,6 +9,16 @@ INST_GROUND_COLOR = (26,45,54)
 INST_MARKER_COLOR = (255,255,255)
 INST_INDICATOR_COLOR = (30,100,255)
 
+def attitude_indicator_inop(scale):
+    output = np.zeros((INST_DIMENSION,INST_DIMENSION,3), np.uint8)
+    cv2.line(output, (0,0),  (INST_DIMENSION,INST_DIMENSION),(0,0,255),2)
+    cv2.line(output, (0,INST_DIMENSION),  (INST_DIMENSION,0),(0,0,255),2)
+    if scale < 100 and scale > 0:
+        scale_dim = int(INST_DIMENSION * scale / 100.0)
+        scale_dim = (scale_dim, scale_dim)
+        output = cv2.resize(output, scale_dim, interpolation=cv2.INTER_AREA)
+    return output
+
 def attitude_indicator_instrument(pitch: float, roll: float, scale:int = 100):
     output = np.zeros((INST_DIMENSION,INST_DIMENSION,3), np.uint8)
     output = __render_pitch(output, pitch)
@@ -43,12 +53,12 @@ __center_roll_ptr = np.array([
     [INST_DIMENSION // 2 - 18,  (INST_DIMENSION // 9) - 45],    # Left Corner
     [INST_DIMENSION // 2 + 12,  (INST_DIMENSION // 9) - 45]     # Right Corner
     ],np.int32)
-__r10_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 20, 10.0),__roll_y_coor((INST_DIMENSION / 2) - 20, 10.0))
-__r20_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 20, 20.0),__roll_y_coor((INST_DIMENSION / 2) - 20, 20.0))
+__r10_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 30, 10.0),__roll_y_coor((INST_DIMENSION / 2) - 30, 10.0))
+__r20_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 30, 20.0),__roll_y_coor((INST_DIMENSION / 2) - 30, 20.0))
 __r30_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 10, 30.0),__roll_y_coor((INST_DIMENSION / 2) - 10, 30.0))
 __r60_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 10, 60.0),__roll_y_coor((INST_DIMENSION / 2) - 10, 60.0))
-__l10_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 20, -10.0),__roll_y_coor((INST_DIMENSION / 2) - 20, -10.0))
-__l20_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 20, -20.0),__roll_y_coor((INST_DIMENSION / 2) - 20, -20.0))
+__l10_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 30, -10.0),__roll_y_coor((INST_DIMENSION / 2) - 30, -10.0))
+__l20_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 30, -20.0),__roll_y_coor((INST_DIMENSION / 2) - 30, -20.0))
 __l30_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 10, -30.0),__roll_y_coor((INST_DIMENSION / 2) - 10, -30.0))
 __l60_roll_displacement = (__roll_x_coor((INST_DIMENSION / 2) - 10, -60.0),__roll_y_coor((INST_DIMENSION / 2) - 10, -60.0))
 
