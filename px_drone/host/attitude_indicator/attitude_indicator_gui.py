@@ -93,20 +93,20 @@ def __render_pitch(src: np.ndarray, pitch: float) -> np.ndarray:
     cv2.rectangle(inner,(0,0),(INST_DIMENSION,INST_DIMENSION),INST_SKY_COLOR,-1)
     cv2.rectangle(inner,(0,pitch_pos),(INST_DIMENSION,INST_DIMENSION),INST_GROUND_COLOR,-1)
     cv2.line(inner, (0,pitch_pos), (INST_DIMENSION,pitch_pos),INST_MARKER_COLOR,2)
-    cv2.line(inner, (INST_DIMENSION // 2 - 60,pitch_pos + __pitch_displacement(-20.0)), (INST_DIMENSION // 2 + 60,pitch_pos + __pitch_displacement(-20.0)),INST_MARKER_COLOR,2)
+    cv2.line(inner, (INST_DIMENSION // 2 - 60,pitch_pos + __pitch_displacement(-20.0)), (INST_DIMENSION // 2 + 60,pitch_pos + __pitch_displacement(-20.0)),INST_MARKER_COLOR,3)
     cv2.putText(inner, '20', (INST_DIMENSION // 2 - 90,pitch_pos + __pitch_displacement(-20.0) + 5),cv2.FONT_HERSHEY_SIMPLEX,0.5,INST_MARKER_COLOR,1,cv2.LINE_AA)
     cv2.putText(inner, '20', (INST_DIMENSION // 2 + 70,pitch_pos + __pitch_displacement(-20.0) + 5),cv2.FONT_HERSHEY_SIMPLEX,0.5,INST_MARKER_COLOR,1,cv2.LINE_AA)
-    cv2.line(inner, (INST_DIMENSION // 2 - 15,pitch_pos + __pitch_displacement(-15.0)), (INST_DIMENSION // 2 + 15,pitch_pos + __pitch_displacement(-15.0)),INST_MARKER_COLOR,2)
-    cv2.line(inner, (INST_DIMENSION // 2 - 30,pitch_pos + __pitch_displacement(-10.0)), (INST_DIMENSION // 2 + 30,pitch_pos + __pitch_displacement(-10.0)),INST_MARKER_COLOR,2)
+    cv2.line(inner, (INST_DIMENSION // 2 - 15,pitch_pos + __pitch_displacement(-15.0)), (INST_DIMENSION // 2 + 15,pitch_pos + __pitch_displacement(-15.0)),INST_MARKER_COLOR,3)
+    cv2.line(inner, (INST_DIMENSION // 2 - 30,pitch_pos + __pitch_displacement(-10.0)), (INST_DIMENSION // 2 + 30,pitch_pos + __pitch_displacement(-10.0)),INST_MARKER_COLOR,3)
     cv2.putText(inner, '10', (INST_DIMENSION // 2 - 60,pitch_pos + __pitch_displacement(-10.0) + 5),cv2.FONT_HERSHEY_SIMPLEX,0.5,INST_MARKER_COLOR,1,cv2.LINE_AA)
     cv2.putText(inner, '10', (INST_DIMENSION // 2 + 40,pitch_pos + __pitch_displacement(-10.0) + 5),cv2.FONT_HERSHEY_SIMPLEX,0.5,INST_MARKER_COLOR,1,cv2.LINE_AA)
-    cv2.line(inner, (INST_DIMENSION // 2 - 15,pitch_pos + __pitch_displacement(-5.0)), (INST_DIMENSION // 2 + 15,pitch_pos + __pitch_displacement(-5.0)),INST_MARKER_COLOR,2)
-    cv2.line(inner, (INST_DIMENSION // 2 - 15,pitch_pos + __pitch_displacement(5.0)),  (INST_DIMENSION // 2 + 15,pitch_pos + __pitch_displacement(5.0)),INST_MARKER_COLOR,2)
-    cv2.line(inner, (INST_DIMENSION // 2 - 30,pitch_pos + __pitch_displacement(10.0)),  (INST_DIMENSION // 2 + 30,pitch_pos + __pitch_displacement(10.0)),INST_MARKER_COLOR,2)
+    cv2.line(inner, (INST_DIMENSION // 2 - 15,pitch_pos + __pitch_displacement(-5.0)), (INST_DIMENSION // 2 + 15,pitch_pos + __pitch_displacement(-5.0)),INST_MARKER_COLOR,3)
+    cv2.line(inner, (INST_DIMENSION // 2 - 15,pitch_pos + __pitch_displacement(5.0)),  (INST_DIMENSION // 2 + 15,pitch_pos + __pitch_displacement(5.0)),INST_MARKER_COLOR,3)
+    cv2.line(inner, (INST_DIMENSION // 2 - 30,pitch_pos + __pitch_displacement(10.0)),  (INST_DIMENSION // 2 + 30,pitch_pos + __pitch_displacement(10.0)),INST_MARKER_COLOR,3)
     cv2.putText(inner, '10', (INST_DIMENSION // 2 - 60,pitch_pos + __pitch_displacement(10.0) + 5),cv2.FONT_HERSHEY_SIMPLEX,0.5,INST_MARKER_COLOR,1,cv2.LINE_AA)
     cv2.putText(inner, '10', (INST_DIMENSION // 2 + 40,pitch_pos + __pitch_displacement(10.0) + 5),cv2.FONT_HERSHEY_SIMPLEX,0.5,INST_MARKER_COLOR,1,cv2.LINE_AA)
-    cv2.line(inner, (INST_DIMENSION // 2 - 15,pitch_pos + __pitch_displacement(15.0)),  (INST_DIMENSION // 2 + 15,pitch_pos + __pitch_displacement(15.0)),INST_MARKER_COLOR,2)
-    cv2.line(inner, (INST_DIMENSION // 2 - 60,pitch_pos + __pitch_displacement(20.0)),  (INST_DIMENSION // 2 + 60,pitch_pos + __pitch_displacement(20.0)),INST_MARKER_COLOR,2)
+    cv2.line(inner, (INST_DIMENSION // 2 - 15,pitch_pos + __pitch_displacement(15.0)),  (INST_DIMENSION // 2 + 15,pitch_pos + __pitch_displacement(15.0)),INST_MARKER_COLOR,3)
+    cv2.line(inner, (INST_DIMENSION // 2 - 60,pitch_pos + __pitch_displacement(20.0)),  (INST_DIMENSION // 2 + 60,pitch_pos + __pitch_displacement(20.0)),INST_MARKER_COLOR,3)
     cv2.putText(inner, '20', (INST_DIMENSION // 2 - 90,pitch_pos + __pitch_displacement(20.0) + 5),cv2.FONT_HERSHEY_SIMPLEX,0.5,INST_MARKER_COLOR,1,cv2.LINE_AA)
     cv2.putText(inner, '20', (INST_DIMENSION // 2 + 70,pitch_pos + __pitch_displacement(20.0) + 5),cv2.FONT_HERSHEY_SIMPLEX,0.5,INST_MARKER_COLOR,1,cv2.LINE_AA)
     inner = cv2.bitwise_and(inner, inner, mask=__inner_circle_mask)
@@ -133,17 +133,17 @@ def __render_roll(src: np.ndarray, roll: float) -> np.ndarray:
     cv2.line(output, \
         ((INST_DIMENSION // 9) * 3, INST_DIMENSION // 2), \
         ((INST_DIMENSION // 9) * 4, INST_DIMENSION // 2), \
-        INST_INDICATOR_COLOR, 3)
+        INST_INDICATOR_COLOR, 5)
     cv2.line(output, \
         ((INST_DIMENSION // 9) * 5, INST_DIMENSION // 2), \
         ((INST_DIMENSION // 9) * 6, INST_DIMENSION // 2), \
-        INST_INDICATOR_COLOR, 3)
+        INST_INDICATOR_COLOR, 5)
     cv2.circle(output, \
         (INST_DIMENSION // 2 - 2, INST_DIMENSION // 2),
         4, INST_INDICATOR_COLOR, -1)
 
     # Roll Pointer
-    output = cv2.polylines(output, [__indicator_ptr], True, INST_INDICATOR_COLOR, 2)
+    output = cv2.polylines(output, [__indicator_ptr], True, INST_INDICATOR_COLOR, 4)
     return output
 
 if __name__ == "__main__":
