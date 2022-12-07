@@ -12,7 +12,7 @@ class ETHERNET_ADAPTER:
     PORT = 8250
     # NOTE: This is windows dependent for connecting to the correct interface
     # For Windows, use ipconfig and enter the host's current IP
-    INTERFACE = "192.168.12.248"#192.168.4.35"
+    INTERFACE = "192.168.4.35"
 
     PAYLOAD_SIZE = 16
     PAYLOAD_FORM = '!fff1B3b'
