@@ -19,4 +19,4 @@ udp.o: $(COMMON)/udp.cpp
 clean:
 	rm -rvf *.o
 	rm -rvf *.out
-	rm -rvf imu
+	rm -rvf *.d
