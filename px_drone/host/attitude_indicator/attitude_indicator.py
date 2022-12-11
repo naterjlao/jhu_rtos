@@ -25,7 +25,7 @@ LAYOUT = [
 if __name__ == "__main__":
     window = sg.Window('FlyPi Attitude Indicator', LAYOUT, finalize=True)
     # Setup Receiver
-    receiver = lib.ETHERNET_ADAPTER()
+    receiver = lib.ETHERNET_ADAPTER_IMU()
 
     ########## Event Loop ##########
     persistance = 0
