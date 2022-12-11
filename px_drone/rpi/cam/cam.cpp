@@ -1,7 +1,6 @@
 #include <opencv2/core.hpp>
 #include <opencv2/videoio.hpp>
 #include <opencv2/highgui.hpp>
-#include <iostream>
 #include <stdio.h>
 
 #include "protocol.hpp"
@@ -28,48 +27,34 @@ int main(int, char **)
     // ----- OUTPUT OBJECTS ----- //
     PROTOCOL::UDP *udp = new PROTOCOL::UDP(TARGET_IP, TARGET_PORT, PROCESS_PORT);
 
-    cv::Mat input;
-    cv::Mat output;
-
-    std::vector<int> COMPRESSION_PARAMS;
-    COMPRESSION_PARAMS.push_back(cv::IMWRITE_PNG_COMPRESSION);
-    COMPRESSION_PARAMS.push_back(0);
-
     //--- INITIALIZE VIDEOCAPTURE ----- //
     cv::VideoCapture cap;
-    // open the default camera using default API
-    // cap.open(0);
-    // OR advance usage: select any API backend
+    cv::Mat frame;
     int deviceID = 0;        // 0 = open default camera
     int apiID = cv::CAP_ANY; // 0 = autodetect default API
-    // open selected camera using selected API
-    cap.open(deviceID, apiID);
-    // check if we succeeded
+    cap.open(deviceID, apiID); // open selected camera using selected API
+    
+    // Validate Camera open
     if (!cap.isOpened())
     {
-        std::cerr << "ERROR! Unable to open camera\n";
+        printf("ERROR! Unable to open camera\n");
         return -1;
     }
-
-    int idx = 0;
-    size_t sent = 0;
-    while (1)
+    else
     {
-        cap.read(input);
-        // if (input.empty())
-        //{
-        //     std::cerr << "ERROR!" << std::endl;
-        // }
+        printf("Starting camera transmission to %s:%d", TARGET_IP, TARGET_PORT);
+    }
 
-        // Raw image is upside down
-        // cv::rotate(input, output, cv::ROTATE_180);
+    // ----- CONTROL LOOP ----- // 
+    while (true)
+    {
+        // ----- READ RAW CAMERA FRAME ----- //
+        cap.read(frame);
 
         // ----- OUTPUT ----- //
-        sent = udp->transmit(&input, sizeof(input));
-        std::cout << idx++ << sent << std::endl;
+        udp->transmit(&frame, sizeof(frame));
     }
-    // Temporary - testing
-    // cv::imwrite("camtest.png", output, COMPRESSION_PARAMS);
 
+    if (udp > 0) delete udp;
     return 0;
 }
