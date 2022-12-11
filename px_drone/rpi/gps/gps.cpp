@@ -1,3 +1,4 @@
+// Based on https://www.electronicwings.com/raspberry-pi/gps-module-interfacing-with-raspberry-pi
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -5,8 +6,30 @@
 #include <wiringPi.h>
 #include <wiringSerial.h>
 
+#include "protocol.hpp"
+
+//-----------------------------------------------------------------------------
+/// @brief Defines the destination IP for the FlyPi data.
+/// @note IP 239.255.255.250:8250 works for some reason
+/// see (http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xhtml)
+//-----------------------------------------------------------------------------
+const char *TARGET_IP = "239.100.100.250";
+
+//-----------------------------------------------------------------------------
+/// @brief Defines the destination port for the FlyPi IMU data.
+//-----------------------------------------------------------------------------
+const int TARGET_PORT = 8252;
+
+//-----------------------------------------------------------------------------
+/// @brief Defines the host port for the FlyPi IMU process.
+//-----------------------------------------------------------------------------
+const int PROCESS_PORT = 8002;
+
 int main()
 {
+    // ----- OUTPUT OBJECTS ----- //
+    PROTOCOL::UDP *udp = new PROTOCOL::UDP(TARGET_IP, TARGET_PORT, PROCESS_PORT);
+
     int serial_port;
     char dat, buff[100], GGA_code[3];
     unsigned char IsitGGAstring = 0;
@@ -59,6 +82,7 @@ int main()
         if (is_GGA_received_completely == 1)
         {
             printf("GGA: %s", buff);
+            udp->transmit(buff, sizeof(buff));
             is_GGA_received_completely = 0;
         }
     }
