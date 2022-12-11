@@ -30,7 +30,7 @@ const int PROCESS_PORT = 8001;
 //-----------------------------------------------------------------------------
 const char *IMAGE_ENCODING = ".jpg";
 const int IMAGE_PARAM = cv::IMWRITE_JPEG_QUALITY;
-const int IMAGE_QUALITY = 90;
+const int IMAGE_QUALITY = 80;
 
 int main(int, char **)
 {
@@ -71,9 +71,7 @@ int main(int, char **)
         cv::imencode(".jpg", frame, buffer, COMPRESSION_PARAMS);
 
         // ----- OUTPUT ----- //
-        size_t sent = udp->transmit(buffer.data(), buffer.size());
-
-        printf("%d\n",sent);
+        udp->transmit(buffer.data(), buffer.size());
     }
 
     if (udp > 0) delete udp;
