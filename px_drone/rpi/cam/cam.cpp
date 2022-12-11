@@ -4,8 +4,28 @@
 #include <iostream>
 #include <stdio.h>
 
+//-----------------------------------------------------------------------------
+/// @brief Defines the destination IP for the FlyPi data.
+/// @note IP 239.255.255.250:8250 works for some reason
+/// see (http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xhtml)
+//-----------------------------------------------------------------------------
+const char* TARGET_IP = "239.100.100.250";
+
+//-----------------------------------------------------------------------------
+/// @brief Defines the destination port for the FlyPi IMU data.
+//-----------------------------------------------------------------------------
+const int TARGET_PORT = 8251;
+
+//-----------------------------------------------------------------------------
+/// @brief Defines the host port for the FlyPi IMU process.
+//-----------------------------------------------------------------------------
+const int PROCESS_PORT = 8001;
+
 int main(int, char **)
 {
+    // ----- OUTPUT OBJECTS ----- //
+    PROTOCOL::UDP* udp = new PROTOCOL::UDP(TARGET_IP, TARGET_PORT, PROCESS_PORT);
+
     cv::Mat input;
     cv::Mat output;
 
@@ -13,7 +33,7 @@ int main(int, char **)
     COMPRESSION_PARAMS.push_back(cv::IMWRITE_PNG_COMPRESSION);
     COMPRESSION_PARAMS.push_back(0);
 
-    //--- INITIALIZE VIDEOCAPTURE
+    //--- INITIALIZE VIDEOCAPTURE ----- //
     cv::VideoCapture cap;
     // open the default camera using default API
     // cap.open(0);
@@ -40,7 +60,10 @@ int main(int, char **)
 
     // Raw image is upside down
     //cv::rotate(input, output, cv::ROTATE_180);
-    std::cout << idx++ << std::endl;
+    
+        // ----- OUTPUT ----- //
+        retval = udp->transmit(&imu_data, sizeof(imu_data));
+        std::cout << idx++ << retval << std::endl;
     }
     // Temporary - testing
     //cv::imwrite("camtest.png", output, COMPRESSION_PARAMS);
