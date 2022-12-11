@@ -9,7 +9,7 @@ import viewport_lib as lib
 
 sg.theme('Dark Blue')
 
-HYSTERESIS = 5
+HYSTERESIS = 10
 FONT_SIZE = ('Any 30')
 LAYOUT = [
     [sg.Text('FlyPi ViewPort'), sg.Push(), sg.Text('             Author: Nate Lao (lao.nathan@yahoo.com)')],
