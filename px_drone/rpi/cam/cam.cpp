@@ -42,7 +42,7 @@ int main(int, char **)
     }
     else
     {
-        printf("Starting camera transmission to %s:%d", TARGET_IP, TARGET_PORT);
+        printf("Starting camera transmission -> %s:%d\n", TARGET_IP, TARGET_PORT);
     }
 
     // ----- CONTROL LOOP ----- // 
