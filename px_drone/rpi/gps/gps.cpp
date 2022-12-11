@@ -48,6 +48,8 @@ int main()
         return 1;
     }
 
+    // Ensure clearout of transmit buffer
+    memset(buff, 0, sizeof(buff));
     while (1)
     {
 
