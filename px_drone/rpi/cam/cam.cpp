@@ -30,7 +30,7 @@ const int PROCESS_PORT = 8001;
 //-----------------------------------------------------------------------------
 const char *IMAGE_ENCODING = ".jpg";
 const int IMAGE_PARAM = cv::IMWRITE_JPEG_QUALITY;
-const int IMAGE_QUALITY = 80;
+const int IMAGE_QUALITY = 15;
 
 int main(int, char **)
 {
