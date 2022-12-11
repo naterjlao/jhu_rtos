@@ -28,7 +28,7 @@ const int PROCESS_PORT = 8001;
 /// through UDP does not exceed the UDP size limit. This has to be done by a
 /// case by case basis and can verified by calling buffer.size().
 //-----------------------------------------------------------------------------
-const char IMAGE_ENCODING = ".jpg";
+const char *IMAGE_ENCODING = ".jpg";
 const int IMAGE_PARAM = cv::IMWRITE_JPEG_QUALITY;
 const int IMAGE_QUALITY = 90;
 
@@ -40,7 +40,7 @@ int main(int, char **)
     //--- INITIALIZE VIDEOCAPTURE ----- //
     cv::VideoCapture cap;
     cv::Mat frame;
-    cv::vector<uchar> buffer;
+    std::vector<uchar> buffer;
     int deviceID = 0;        // 0 = open default camera
     int apiID = cv::CAP_ANY; // 0 = autodetect default API
     cap.open(deviceID, apiID); // open selected camera using selected API
@@ -71,9 +71,9 @@ int main(int, char **)
         cv::imencode(".jpg", frame, buffer, COMPRESSION_PARAMS);
 
         // ----- OUTPUT ----- //
-        udp->transmit(&frame, sizeof(frame));
+        size_t sent = udp->transmit(buffer.data(), buffer.size());
 
-        printf("%d\n",buffer.size());
+        printf("%d\n",sent);
     }
 
     if (udp > 0) delete udp;
