@@ -11,7 +11,9 @@ cd ..
 
 # GPS DAEMON
 cd gps
-
+make clean
+make all
+mv -v flypi-gps.d ~/flypi.d/
 cd ..
 
 # IMU DAEMON
