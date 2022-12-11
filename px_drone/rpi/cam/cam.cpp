@@ -4,6 +4,8 @@
 #include <iostream>
 #include <stdio.h>
 
+#include "protocol.hpp"
+
 //-----------------------------------------------------------------------------
 /// @brief Defines the destination IP for the FlyPi data.
 /// @note IP 239.255.255.250:8250 works for some reason
@@ -62,7 +64,7 @@ int main(int, char **)
     //cv::rotate(input, output, cv::ROTATE_180);
     
         // ----- OUTPUT ----- //
-        retval = udp->transmit(&imu_data, sizeof(imu_data));
+        retval = udp->transmit(&input, sizeof(input));
         std::cout << idx++ << retval << std::endl;
     }
     // Temporary - testing
