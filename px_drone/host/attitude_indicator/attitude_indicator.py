@@ -3,7 +3,6 @@
 # Designed for Windows OS
 # GUI Driver for AI measurements
 import PySimpleGUI as sg
-import numpy as np
 import cv2
 import attitude_indicator_lib as lib
 import attitude_indicator_gui as gui

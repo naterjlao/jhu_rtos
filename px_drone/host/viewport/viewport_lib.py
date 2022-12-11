@@ -2,7 +2,6 @@
 # Author: Nate Lao (nlao1@jh.edu)
 # Designed for Windows OS
 import socket
-import struct
 import time
 
 # TODO create superclass
