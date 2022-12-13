@@ -13,7 +13,7 @@ class ETHERNET_ADAPTER_CAM:
     # For Windows, use ipconfig and enter the host's current IP
     INTERFACE = "192.168.4.35"
 
-    PAYLOAD_SIZE = 20000
+    PAYLOAD_SIZE = 50000
 
 
     # TODO parameterize arguments
