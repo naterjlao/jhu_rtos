@@ -47,7 +47,8 @@ int main()
     PROTOCOL::UDP* udp = new PROTOCOL::UDP(TARGET_IP, TARGET_PORT, PROCESS_PORT);
     PROTOCOL::IMU_DATA imu_data;
 
-    while (1)
+    // ----- CONTROL LOOP ----- //
+    while (true)
     {
         // ----- INPUT ----- //
         retval = usb->read(&imu_payload,sizeof(imu_payload));
